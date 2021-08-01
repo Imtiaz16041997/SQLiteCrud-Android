@@ -3,6 +3,7 @@ package com.example.listviewdemodatabase;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -16,18 +17,17 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     private static final String ID = "_id";
     private static final String NAME = "Name";
     private static final String PHONE = "Phone";
-    private static final int VERSION_NUMBER = 2;
+    private static final int VERSION_NUMBER = 5;
 
 
-    private static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+"("+ID+" INTEGER PRIMARY KEY AUTOINCREMENT , "+NAME+" VARCHAR(255) NOT NULL,"+PHONE+" INTEGER(11) NOT NULL )";
-    private static final String DROP_TABLE = "DROP TABLE IF EXISTS "+TABLE_NAME;
-    private static final String SELECT_ALL = "SELECT * FROM "+TABLE_NAME;
-
+    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " + NAME + " VARCHAR(255) NOT NULL," + PHONE + " INTEGER(11) NOT NULL )";
+    private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+    private static final String SELECT_ALL = "SELECT * FROM " + TABLE_NAME;
 
 
     private Context context;
 
-    public DatabaseHelper( Context context ) {
+    public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION_NUMBER);
         this.context = context;
     }
@@ -35,13 +35,13 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        try{
-            Toast.makeText(context,"onCreate Is Calling",Toast.LENGTH_LONG).show();
+        try {
+            Toast.makeText(context, "onCreate Is Calling", Toast.LENGTH_LONG).show();
             sqLiteDatabase.execSQL(CREATE_TABLE);
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
-            Toast.makeText(context,"Exception"+e,Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Exception" + e, Toast.LENGTH_LONG).show();
         }
 
     }
@@ -49,35 +49,76 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
-        try{
+        try {
 
-            Toast.makeText(context,"onUpgrade Is Calling",Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "onUpgrade Is Calling", Toast.LENGTH_LONG).show();
             sqLiteDatabase.execSQL(DROP_TABLE);
             onCreate(sqLiteDatabase);
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
-            Toast.makeText(context,"Exception"+e,Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Exception" + e, Toast.LENGTH_LONG).show();
 
         }
 
     }
 
-    public long saveData(String name, String phone){
+    public long saveData(String name, String phone) {
+        //get writable database because we want to write data
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        //id will be inserted automatically as we set AUTOINCREMENT in query
         ContentValues contentValues = new ContentValues();
-        contentValues.put("NAME",name);
-        contentValues.put("PHONE",phone);
-
-        long rowNumber = sqLiteDatabase.insert(TABLE_NAME,null,contentValues);
+        //insert data
+        contentValues.put("NAME", name);
+        contentValues.put("PHONE", phone);
+        //insert row , it will return record id of saved record
+        long rowNumber = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         return rowNumber;
     }
 
-    public Cursor displayAllData(){
+    public Cursor displayAllData() {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT_ALL, null);
         return cursor;
 
     }
+
+//    public Boolean updateData(String name, String phone) {
+//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("NAME", name);
+//        contentValues.put("PHONE", phone);
+//        sqLiteDatabase.update(TABLE_NAME, contentValues, NAME + " = ? ", new String[]{name});
+//        return true;
+//
+//    }
+
+    public int deleteData(String name) {
+
+            SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+            int value = sqLiteDatabase.delete(TABLE_NAME, NAME + " = ", new String[]{name});
+            return value;
+        }
+
+
+
+//        try {
+//            Cursor cursor = database.query("massege", null, null,
+//                    null, null, null,null);
+//            if (cursor.moveToPosition(i)) {
+//                String id1 = cursor.getString(cursor.getColumnIndex(TABLE_NAME.id1));
+//                sqLiteDatabase.execSQL("delete from massege where ID = ?", new String[]{id1});
+//                result = "1";
+//            }
+//        }
+//        catch (SQLException e)
+//        {
+//            e.printStackTrace();
+//            result += "The query data is abnormal!" + e.getMessage();
+//        }
+//        return result;
+
+
+
 }

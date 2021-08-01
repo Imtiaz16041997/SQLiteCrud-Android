@@ -9,14 +9,14 @@
     tools:context=".MainActivity">
 
 
-    <EditText
-        android:id="@+id/editId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="ID"/>
+<!--    <EditText-->
+<!--        android:id="@+id/editId"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="text"-->
+<!--        android:hint="ID"/>-->
 
     <EditText
         android:id="@+id/editName"
