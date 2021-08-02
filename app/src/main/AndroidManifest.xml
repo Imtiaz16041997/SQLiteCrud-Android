@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ListViewDemoDatabase">
         <activity
+            android:name=".UpdateActivity"
+            android:exported="true" />
+        <activity
             android:name=".ListDataActivity"
             android:exported="true" />
         <activity

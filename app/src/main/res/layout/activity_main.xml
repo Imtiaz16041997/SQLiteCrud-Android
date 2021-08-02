@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="40dp"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -57,25 +58,25 @@
         android:textColorHint="#000000"
         app:backgroundTint="#1DE9B6" />
 
-    <Button
-        android:id="@+id/updatebuttonId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+<!--    <Button-->
+<!--        android:id="@+id/updatebuttonId"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
 
-        android:hint="Update"
-        android:textColor="@color/purple_200"
-        android:textColorHint="#000000"
-        app:backgroundTint="#1DE9B6" />
+<!--        android:hint="Update"-->
+<!--        android:textColor="@color/purple_200"-->
+<!--        android:textColorHint="#000000"-->
+<!--        app:backgroundTint="#1DE9B6" />-->
 
-    <Button
-        android:id="@+id/deletebuttonId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+<!--    <Button-->
+<!--        android:id="@+id/deletebuttonId"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
 
-        android:hint="Delete"
-        android:textColor="@color/purple_200"
-        android:textColorHint="#000000"
-        app:backgroundTint="#1DE9B6" />
+<!--        android:hint="Delete"-->
+<!--        android:textColor="@color/purple_200"-->
+<!--        android:textColorHint="#000000"-->
+<!--        app:backgroundTint="#1DE9B6" />-->
 </LinearLayout>
